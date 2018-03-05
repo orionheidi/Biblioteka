@@ -1,0 +1,61 @@
+<div>
+	<h1>Books</h1>
+	<div ng-controller="booksCtrl">
+		<div>
+			<form>
+				naslov:<input ng-model="book.title" class="form-control" >
+				autor:
+				<select class="form-control"
+      			ng-options="prepAuthor(author) for author in authors track by author.id"
+      				ng-model="book.author">
+  				</select>
+				cena:<input ng-model="book.price" class="form-control">
+				godina izdanja:<input ng-model="book.year" class="form-control">
+				<button ng-click="save()" class="btn btn-success">sacuvaj</button>
+			</form>
+			<form>
+				cena od:
+				<input class="form-control" ng-model="priceFrom">
+				cena do:
+				<input class="form-control" ng-model="priceTo">
+				<button ng-click="filter()" class="btn btn-success">filtriraj</button>
+			</form>
+				<!-- TODO implementirati filter po imenu ili prezimenu autora -->
+			<form>
+				ime ili prezime autora:
+				<input class="form-control" ng-model="lastName">
+				<input class="form-control" ng-model="firstName">
+				<select class="form-control" ng-model="order">
+					<option value="1">Opadajuci</option>
+					<option value="0">Rastuci</option>
+				</select>
+				<button ng-click="filterName()" class="btn btn-success">filtriraj</button>
+			</form>
+
+		</div>
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>naslov</th>
+					<th>autor</th>
+					<th>cena</th>
+					<th>godina izdanja</th>
+					<th>akcija</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="book in books">
+					<td>{{book.id}}</td>
+					<td>{{book.title}}</td>
+					<td>{{book.author.firstName}} {{book.author.lastName}}</td>
+					<td>{{book.price}}</td>
+					<td>{{book.year}}</td>
+					<td>
+						<button ng-click="postavi(book)">postavi</button>				
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
